@@ -1,0 +1,11 @@
+FROM alpine:3.9
+
+WORKDIR /
+
+RUN apk add git bash build-base
+RUN git clone https://github.com/edenhill/librdkafka.git \
+	&& cd librdkafka \
+	&& ./configure --prefix /usr \
+	&& make \
+	&& make install
+RUN apk del git bash build-base
